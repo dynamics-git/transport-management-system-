@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+      "name": "Procure Sandbox Demo",
+      "request": "launch",
+      "type": "al",
+      "tenant": "tecsa.com.my",
+       "environmentType": "Sandbox",
+      "environmentName": "procure-sandbox",
+      "startupObjectId": 9002,
+      "startupObjectType": "Page",
+      "breakOnError": true,
+      "launchBrowser": true,
+      "enableLongRunningSqlStatements": true,
+      "enableSqlInformationDebugger": true,
+      "schemaUpdateMode": "ForceSync"
+    },
+    ]
+}
