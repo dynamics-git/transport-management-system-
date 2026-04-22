@@ -1,4 +1,4 @@
-enum 50101 "Rebate Status"
+enum 50501 "Rebate Status"
 {
     Extensible = true;
     AssignmentCompatibility = true;
