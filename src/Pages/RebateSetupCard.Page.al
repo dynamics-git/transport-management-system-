@@ -73,6 +73,8 @@ page 50001 "Rebate Setup Card"
                 field("Entity ID"; Rec."Entity ID")
                 {
                     ApplicationArea = All;
+                    TableRelation = if ("Entity Type" = const("Customer")) Customer."No." else
+                    if ("Entity Type" = const("Vendor")) Vendor."No.";
                 }
                 field("Entity Name"; Rec."Entity Name")
                 {
@@ -121,8 +123,40 @@ page 50001 "Rebate Setup Card"
                 Image = Copy;
 
                 trigger OnAction()
+                var
+                    NewRebateSetupMaster: Record "Rebate Setup Master";
+                    NewRebateSetupLine: Record "Rebate Setup Line";
+                    RebateSetupLine: Record "Rebate Setup Line";
+                    NewSetupID: Code[20];
                 begin
-                    Message('Copy functionality will be implemented in future version.');
+                    // Generate new setup ID
+                    NewSetupID := CopyStr(Rec."Setup ID" + '-COPY', 1, 20);
+
+                    // Check if the new ID already exists and increment if needed
+                    while NewRebateSetupMaster.Get(NewSetupID) do begin
+                        if StrLen(NewSetupID) < 20 then
+                            NewSetupID := CopyStr(NewSetupID + '1', 1, 20)
+                        else
+                            Error('Cannot generate unique setup ID for copy');
+                    end;
+
+                    // Copy master record
+                    NewRebateSetupMaster := Rec;
+                    NewRebateSetupMaster."Setup ID" := NewSetupID;
+                    NewRebateSetupMaster.Description := CopyStr(Rec.Description + ' (Copy)', 1, 100);
+                    NewRebateSetupMaster.Status := NewRebateSetupMaster.Status::Draft;
+                    NewRebateSetupMaster.Insert();
+
+                    // Copy setup lines
+                    RebateSetupLine.SetRange("Setup ID", Rec."Setup ID");
+                    if RebateSetupLine.FindSet() then
+                        repeat
+                            NewRebateSetupLine := RebateSetupLine;
+                            NewRebateSetupLine."Setup ID" := NewSetupID;
+                            NewRebateSetupLine.Insert();
+                        until RebateSetupLine.Next() = 0;
+
+                    Message('Setup %1 has been copied to %2', Rec."Setup ID", NewSetupID);
                 end;
             }
         }
