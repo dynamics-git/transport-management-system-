@@ -1,4 +1,4 @@
-codeunit 50102 "Rebate Application Manager"
+codeunit 50502 "Rebate Application Manager"
 {
     TableNo = "Rebate Transaction";
 

@@ -1,4 +1,4 @@
-codeunit 50103 "Rebate Demo Data"
+codeunit 50503 "Rebate Demo Data"
 {
     procedure CreateSampleRebateSetup()
     var

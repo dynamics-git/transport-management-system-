@@ -1,4 +1,4 @@
-permissionset 50100 "Rebate Mgmt - Basic"
+permissionset 50500 "Rebate Mgmt - Basic"
 {
     Assignable = true;
     Caption = 'Rebate Management - Basic';

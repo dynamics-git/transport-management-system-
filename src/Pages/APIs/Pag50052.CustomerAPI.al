@@ -1,4 +1,4 @@
-page 50152 "Customer API"
+page 50553 "Customer API"
 {
     APIGroup = 'procure';
     APIPublisher = 'tecsa';

@@ -1,4 +1,4 @@
-enum 50103 "Rebate Component Type"
+enum 50503 "Rebate Component Type"
 {
     Extensible = true;
     AssignmentCompatibility = true;

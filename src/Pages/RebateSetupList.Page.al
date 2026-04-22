@@ -1,4 +1,4 @@
-page 50100 "Rebate Setup List"
+page 50500 "Rebate Setup List"
 {
     PageType = List;
     ApplicationArea = All;

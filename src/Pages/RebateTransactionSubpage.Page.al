@@ -1,4 +1,4 @@
-page 50105 "Rebate Transaction Subpage"
+page 50505 "Rebate Transaction Subpage"
 {
     PageType = ListPart;
     ApplicationArea = All;

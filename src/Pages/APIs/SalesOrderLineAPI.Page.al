@@ -1,4 +1,4 @@
-page 50151 "Sales Order Line API"
+page 50552 "Sales Order Line API"
 {
     PageType = API;
     Caption = 'Sales Order Lines', Locked = true;

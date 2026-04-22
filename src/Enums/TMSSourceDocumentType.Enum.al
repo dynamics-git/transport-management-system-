@@ -1,4 +1,4 @@
-enum 50502 "TMS Source Document Type"
+enum 50505 "TMS Source Document Type"
 {
     Extensible = true;
     value(0; "Sales Order") { }
