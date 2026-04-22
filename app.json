@@ -2,7 +2,7 @@
   "id": "5f9f1740-5e0d-4c37-824b-9a3d050e8a88",
   "name": "Rebate Management",
   "publisher": "TECSA",
-  "version": "1.0.0.0",
+  "version": "1.0.0.2",
   "brief": "Rebate Management System for Business Central",
   "description": "A comprehensive rebate management module that calculates and applies rebates based on setup rules including Market Rebate, EPI, PPI, VI, and manual adjustments.",
   "privacyStatement": "https://tecsasolutions.com/privacy",
@@ -13,10 +13,10 @@
   "dependencies": [],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "27.5.0.0",
+  "application": "27.0.0.0",
   "idRanges": [
     {
-      "from": 50000,
+      "from": 5000,
       "to": 50099
     }
   ],

@@ -5,6 +5,7 @@ page 50003 "Rebate Transaction List"
     UsageCategory = Lists;
     SourceTable = "Rebate Transaction";
     Caption = 'Rebate Transaction List';
+    CardPageId = "Rebate Transaction Card";
 
     layout
     {
