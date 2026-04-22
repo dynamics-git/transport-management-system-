@@ -1,6 +1,6 @@
-page 50053 "Location API"
+page 50153 "Location API"
 {
-    APIGroup = 'demo';
+    APIGroup = 'procure';
     APIPublisher = 'tecsa';
     APIVersion = 'v1.0';
     ApplicationArea = All;
@@ -10,7 +10,7 @@ page 50053 "Location API"
     EntitySetName = 'locations';
     PageType = API;
     SourceTable = Location;
-    
+
     layout
     {
         area(Content)

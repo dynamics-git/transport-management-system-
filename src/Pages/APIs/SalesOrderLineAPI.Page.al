@@ -1,10 +1,10 @@
-page 50051 "Sales Order Line API"
+page 50151 "Sales Order Line API"
 {
     PageType = API;
     Caption = 'Sales Order Lines', Locked = true;
     ChangeTrackingAllowed = true;
     APIPublisher = 'tecsa';
-    APIGroup = 'demo';
+    APIGroup = 'procure';
     APIVersion = 'v1.0';
     EntityName = 'salesOrderLine';
     EntitySetName = 'salesOrderLines';

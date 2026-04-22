@@ -1,13 +1,34 @@
+// {
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//       "name": "Procure Sandbox Demo",
+//       "request": "launch",
+//       "type": "al",
+//       "tenant": "tecsa.com.my",
+//        "environmentType": "Production",
+//       "environmentName": "Production",
+//       "startupObjectId": 9002,
+//       "startupObjectType": "Page",
+//       "breakOnError": true,
+//       "launchBrowser": true,
+//       "enableLongRunningSqlStatements": true,
+//       "enableSqlInformationDebugger": true,
+//       "schemaUpdateMode": "ForceSync"
+//     },
+//     ]
+// }
+
 {
     "version": "0.2.0",
     "configurations": [
         {
-      "name": "Procure Sandbox Demo",
+    "name": "Procure Sandbox",
       "request": "launch",
       "type": "al",
       "tenant": "tecsa.com.my",
-       "environmentType": "Production",
-      "environmentName": "Production",
+       "environmentType": "Sandbox",
+      "environmentName": "Procure360",
       "startupObjectId": 9002,
       "startupObjectType": "Page",
       "breakOnError": true,

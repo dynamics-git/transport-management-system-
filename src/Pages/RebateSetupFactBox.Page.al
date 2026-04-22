@@ -1,4 +1,4 @@
-page 50010 "Rebate Setup FactBox"
+page 50110 "Rebate Setup FactBox"
 {
     PageType = CardPart;
     ApplicationArea = All;

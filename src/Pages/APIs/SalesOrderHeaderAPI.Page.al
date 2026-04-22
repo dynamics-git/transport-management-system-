@@ -1,10 +1,10 @@
-page 50050 "Sales Order Header API"
+page 50150 "Sales Order Header API"
 {
     PageType = API;
     Caption = 'Sales Order Header', Locked = true;
     ChangeTrackingAllowed = true;
     APIPublisher = 'tecsa';
-    APIGroup = 'demo';
+    APIGroup = 'procure';
     APIVersion = 'v1.0';
     EntityName = 'salesOrderHeader';
     EntitySetName = 'salesOrderHeaders';

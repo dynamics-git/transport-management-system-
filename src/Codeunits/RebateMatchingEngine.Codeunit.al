@@ -1,4 +1,4 @@
-codeunit 50001 "Rebate Matching Engine"
+codeunit 50101 "Rebate Matching Engine"
 {
     TableNo = "Rebate Transaction";
 

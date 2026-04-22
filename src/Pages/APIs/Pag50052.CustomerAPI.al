@@ -1,6 +1,6 @@
-page 50052 "Customer API"
+page 50152 "Customer API"
 {
-    APIGroup = 'demo';
+    APIGroup = 'procure';
     APIPublisher = 'tecsa';
     APIVersion = 'v1.0';
     ApplicationArea = All;
@@ -10,7 +10,7 @@ page 50052 "Customer API"
     EntitySetName = 'customers';
     PageType = API;
     SourceTable = Customer;
-    
+
     layout
     {
         area(Content)
@@ -320,10 +320,6 @@ page 50052 "Customer API"
                 field(invoiceAmounts; Rec."Invoice Amounts")
                 {
                     Caption = 'Invoice Amounts';
-                }
-                field(invoiceCopies; Rec."Invoice Copies")
-                {
-                    Caption = 'Invoice Copies';
                 }
                 field(invoiceDiscCode; Rec."Invoice Disc. Code")
                 {

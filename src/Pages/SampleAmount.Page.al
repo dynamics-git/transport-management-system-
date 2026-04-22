@@ -1,4 +1,4 @@
-page 50011 "Sample Amount"
+page 50111 "Sample Amount"
 {
     PageType = StandardDialog;
     ApplicationArea = All;
