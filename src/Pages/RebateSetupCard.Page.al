@@ -1,4 +1,4 @@
-page 50501 "Rebate Setup Card"
+page 50831 "Rebate Setup Card"
 {
     PageType = Card;
     ApplicationArea = All;

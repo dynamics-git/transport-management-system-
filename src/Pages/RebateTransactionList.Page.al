@@ -1,4 +1,4 @@
-page 50503 "Rebate Transaction List"
+page 50833 "Rebate Transaction List"
 {
     PageType = List;
     ApplicationArea = All;

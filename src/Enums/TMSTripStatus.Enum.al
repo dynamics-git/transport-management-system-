@@ -1,4 +1,4 @@
-enum 50506 "TMS Trip Status"
+enum 50501 "TMS Trip Status"
 {
     Extensible = true;
     value(0; Planned) { }

@@ -1,4 +1,4 @@
-table 50500 "Rebate Setup Master"
+table 50810 "Rebate Setup Master"
 {
     Caption = 'Rebate Setup Master';
     DataClassification = CustomerContent;

@@ -1,4 +1,4 @@
-enum 50502 "Entity Type"
+enum 50802 "Entity Type"
 {
     Extensible = true;
     AssignmentCompatibility = true;

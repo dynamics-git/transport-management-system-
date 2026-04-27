@@ -1,4 +1,4 @@
-enum 50500 "Rebate Type"
+enum 50800 "Rebate Type"
 {
     Extensible = true;
     AssignmentCompatibility = true;

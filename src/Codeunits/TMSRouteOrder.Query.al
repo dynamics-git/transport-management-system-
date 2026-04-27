@@ -1,7 +1,7 @@
 query 50530 "TMS Route Order"
 {
     QueryType = API;
-    APIPublisher = 'TMS';
+    APIPublisher = 'tecsa';
     APIGroup = 'procure';
     APIVersion = 'v1.0';
     EntityName = 'routeorder';
