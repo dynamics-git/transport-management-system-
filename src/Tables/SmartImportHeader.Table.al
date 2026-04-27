@@ -141,4 +141,23 @@ table 50610 "Smart Import Header"
         "Modified By" := CopyStr(UserId(), 1, MaxStrLen("Modified By"));
         "Modified DateTime" := CurrentDateTime();
     end;
+
+    trigger OnDelete()
+    var
+        SmartImportLine: Record "Smart Import Line";
+        SmartImportField: Record "Smart Import Field";
+        SmartImportLog: Record "Smart Import Log";
+    begin
+        if Status = Status::Created then
+            Error('Cannot delete import %1 because it is already created.', "Import No.");
+
+        SmartImportLine.SetRange("Import No.", "Import No.");
+        SmartImportLine.DeleteAll(true);
+
+        SmartImportField.SetRange("Import No.", "Import No.");
+        SmartImportField.DeleteAll(true);
+
+        SmartImportLog.SetRange("Import No.", "Import No.");
+        SmartImportLog.DeleteAll(true);
+    end;
 }

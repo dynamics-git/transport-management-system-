@@ -103,6 +103,7 @@ table 50611 "Smart Import Line"
             Error('Phase 1 only supports %1.', Format("Target Document Type"::PurchaseRequisition));
 
         if "Line No." = 0 then begin
+            SmartImportLine.LockTable();
             SmartImportLine.SetRange("Import No.", "Import No.");
             if SmartImportLine.FindLast() then
                 "Line No." := SmartImportLine."Line No." + 10000

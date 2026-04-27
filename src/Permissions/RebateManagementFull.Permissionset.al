@@ -13,8 +13,14 @@ permissionset 50501 "Rebate Mgmt - Full"
         page "Rebate Transaction Subpage" = X,
         page "Rebate Setup FactBox" = X,
         page "Sample Amount" = X,
+        page "Smart Import API" = X,
+        page "Smart Import Field API" = X,
+        page "Smart Import Line API" = X,
+        page "Smart Import Log API" = X,
+        page "Smart Import Map Setup API" = X,
         codeunit "Rebate Calculation Engine" = X,
         codeunit "Rebate Matching Engine" = X,
         codeunit "Rebate Application Manager" = X,
-        codeunit "Rebate Demo Data" = X;
+        codeunit "Rebate Demo Data" = X,
+        codeunit "Smart Import Mgt" = X;
 }

@@ -11,7 +11,7 @@ page 50630 "Smart Import API"
     ODataKeyFields = SystemId;
     InsertAllowed = true;
     ModifyAllowed = true;
-    DeleteAllowed = false;
+    DeleteAllowed = true;
 
     layout
     {

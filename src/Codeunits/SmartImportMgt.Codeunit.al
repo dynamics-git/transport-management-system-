@@ -16,7 +16,13 @@ codeunit 50620 "Smart Import Mgt"
 
     procedure AnalyzeImport(var ImportHeader: Record "Smart Import Header")
     begin
+        ImportHeader.LockTable();
+        ImportHeader.Get(ImportHeader."Import No.");
+
         EnsureImportEditable(ImportHeader);
+
+        if ImportHeader.Status = ImportHeader.Status::Analyzing then
+            Error('Import %1 is already being analyzed. Please retry after the current analysis completes.', ImportHeader."Import No.");
 
         ImportHeader.Validate(Status, ImportHeader.Status::Analyzing);
         ImportHeader.Modify(true);
@@ -178,11 +184,13 @@ codeunit 50620 "Smart Import Mgt"
         SmartImportLine: Record "Smart Import Line";
         SmartImportField: Record "Smart Import Field";
     begin
+        SmartImportLine.LockTable();
         SmartImportLine.SetRange("Import No.", ImportNo);
-        SmartImportLine.DeleteAll();
+        SmartImportLine.DeleteAll(true);
 
+        SmartImportField.LockTable();
         SmartImportField.SetRange("Import No.", ImportNo);
-        SmartImportField.DeleteAll();
+        SmartImportField.DeleteAll(true);
     end;
 
     local procedure CreateMockExtractedFields(var ImportHeader: Record "Smart Import Header")
