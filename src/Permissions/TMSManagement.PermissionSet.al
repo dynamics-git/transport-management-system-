@@ -22,7 +22,6 @@ permissionset 50649 "TMS Management"
         page "TMS Route Trip Line API" = X,
         page "TMS Weighbridge Entry API" = X,
         page "TMS POD Entry API" = X,
-        page "TMS Location API" = X,
         page "Route Order Candidates API" = X,
         query "TMS Route Order" = X,
         codeunit "TMS KPI Management" = X,
