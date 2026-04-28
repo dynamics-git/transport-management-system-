@@ -1,4 +1,4 @@
-table 50513 "TMS Route Trip Line"
+table 50613 "TMS Route Trip Line"
 {
     Caption = 'TMS Route Trip Line';
     DataClassification = CustomerContent;

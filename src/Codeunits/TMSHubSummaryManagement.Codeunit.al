@@ -1,4 +1,4 @@
-codeunit 50541 "TMS Hub Summary Management"
+codeunit 50641 "TMS Hub Summary Management"
 {
     procedure GetHubSummaries(): Text
     var

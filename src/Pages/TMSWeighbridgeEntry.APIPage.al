@@ -1,4 +1,4 @@
-page 50524 "TMS Weighbridge Entry API"
+page 50624 "TMS Weighbridge Entry API"
 {
     PageType = API;
     APIPublisher = 'tecsa';

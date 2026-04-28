@@ -1,4 +1,4 @@
-page 50550 "Route Order Candidates API"
+page 50627 "Route Order Candidates API"
 {
     PageType = API;
     Caption = 'Route Order Candidates';
@@ -72,12 +72,23 @@ page 50550 "Route Order Candidates API"
 
     trigger OnAfterGetRecord()
     begin
-        // Get Sales Header info
+        Clear(CustNo);
+        Clear(CustName);
+        Clear(CustLocCode);
+        Clear(CustCity);
+        Clear(CustPostCode);
+        Clear(CustPhoneNo);
+        Clear(CustEmail);
+        Clear(ShipToCode);
+        Clear(AssignedTripNo);
+        Clear(SequenceNo);
+        Clear(LineStatus);
+        Clear(PlanningStatus);
+
         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then begin
             CustNo := SalesHeader."Sell-to Customer No.";
             ShipToCode := SalesHeader."Ship-to Code";
 
-            // Get Customer info
             if Customer.Get(CustNo) then begin
                 CustName := Customer.Name;
                 CustLocCode := Customer."Location Code";
@@ -88,18 +99,16 @@ page 50550 "Route Order Candidates API"
             end;
         end;
 
-        // Get Route Trip assignment
-        if RouteTripLine.Get(Rec."Document No.", Rec."Line No.") then begin
+        RouteTripLine.Reset();
+        RouteTripLine.SetRange("Source Document Type", RouteTripLine."Source Document Type"::"Sales Order");
+        RouteTripLine.SetRange("Source Document No.", Rec."Document No.");
+        RouteTripLine.SetRange("Source Line No.", Rec."Line No.");
+        if RouteTripLine.FindFirst() then begin
             AssignedTripNo := RouteTripLine."Trip No.";
             SequenceNo := RouteTripLine."Sequence No.";
             LineStatus := Format(RouteTripLine."Line Status");
-        end else begin
-            AssignedTripNo := '';
-            SequenceNo := 0;
-            LineStatus := '';
         end;
 
-        // Calculate planning status
         case true of
             LineStatus <> '':
                 PlanningStatus := LineStatus;

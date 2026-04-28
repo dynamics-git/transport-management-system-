@@ -1,4 +1,4 @@
-table 50514 "TMS Weighbridge Entry"
+table 50614 "TMS Weighbridge Entry"
 {
     Caption = 'TMS Weighbridge Entry';
     DataClassification = CustomerContent;

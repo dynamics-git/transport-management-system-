@@ -1,4 +1,4 @@
-table 50512 "TMS Route Trip Header"
+table 50612 "TMS Route Trip Header"
 {
     Caption = 'TMS Route Trip Header';
     DataClassification = CustomerContent;

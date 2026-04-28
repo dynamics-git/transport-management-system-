@@ -1,4 +1,4 @@
-page 50522 "TMS Route Trip Header API"
+page 50622 "TMS Route Trip Header API"
 {
     PageType = API;
     APIPublisher = 'tecsa';

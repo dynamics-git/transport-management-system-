@@ -1,4 +1,4 @@
-page 50526 "TMS Location API"
+page 50626 "TMS Location API"
 {
     PageType = API;
     APIPublisher = 'tecsa';

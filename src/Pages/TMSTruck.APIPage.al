@@ -1,4 +1,4 @@
-page 50521 "TMS Truck API"
+page 50621 "TMS Truck API"
 {
     PageType = API;
     APIPublisher = 'tecsa';

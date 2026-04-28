@@ -1,4 +1,4 @@
-query 50530 "TMS Route Order"
+query 50630 "TMS Route Order"
 {
     QueryType = API;
     APIPublisher = 'tecsa';
@@ -17,7 +17,7 @@ query 50530 "TMS Route Order"
             column(deliveryDate; "Shipment Date") { }
             dataitem(SalesLine; "Sales Line")
             {
-                DataItemLink = "Document Type" = SalesHeader."Document Type", "No." = SalesHeader."No.";
+                DataItemLink = "Document Type" = SalesHeader."Document Type", "Document No." = SalesHeader."No.";
                 DataItemTableFilter = "Type" = const(Item);
                 column(sourceDocumentNo; "Document No.") { }
                 column(sourceLineNo; "Line No.") { }

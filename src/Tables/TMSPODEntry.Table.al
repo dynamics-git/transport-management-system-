@@ -1,4 +1,4 @@
-table 50515 "TMS POD Entry"
+table 50615 "TMS POD Entry"
 {
     Caption = 'TMS POD Entry';
     DataClassification = CustomerContent;

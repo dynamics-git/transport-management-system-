@@ -1,4 +1,4 @@
-codeunit 50542 "TMS Trip Management"
+codeunit 50642 "TMS Trip Management"
 {
     procedure CreateTrip(TripNo: Code[20]; PlannedDate: Date; HubLocationCode: Code[10]; LoadType: Enum "TMS Load Type"; TransporterCode: Code[20]; TruckNo: Code[20])
     var

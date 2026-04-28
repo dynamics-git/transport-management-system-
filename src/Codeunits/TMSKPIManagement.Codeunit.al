@@ -1,4 +1,4 @@
-codeunit 50540 "TMS KPI Management"
+codeunit 50640 "TMS KPI Management"
 {
     procedure GetKpiSummary(): Text
     var
