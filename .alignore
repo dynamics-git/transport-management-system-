@@ -1,0 +1,8 @@
+portal-procure-bc-21.2
+portal-procure-bc-21.2/**
+**/node_modules/**
+**/dist/**
+**/coverage/**
+**/*.txt
+**/migration.json
+**/*migration*.json

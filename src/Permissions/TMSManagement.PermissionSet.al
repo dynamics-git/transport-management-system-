@@ -4,18 +4,21 @@ permissionset 50649 "TMS Management"
     Caption = 'TMS Management';
 
     Permissions =
+        tabledata "Freight Charges" = RIMD,
         tabledata "TMS Transporter" = RIMD,
         tabledata "TMS Truck" = RIMD,
         tabledata "TMS Route Trip Header" = RIMD,
         tabledata "TMS Route Trip Line" = RIMD,
         tabledata "TMS Weighbridge Entry" = RIMD,
         tabledata "TMS POD Entry" = RIMD,
+        table "Freight Charges" = X,
         table "TMS Transporter" = X,
         table "TMS Truck" = X,
         table "TMS Route Trip Header" = X,
         table "TMS Route Trip Line" = X,
         table "TMS Weighbridge Entry" = X,
         table "TMS POD Entry" = X,
+        page "Freight Charges API" = X,
         page "TMS Transporter API" = X,
         page "TMS Truck API" = X,
         page "TMS Route Trip Header API" = X,
