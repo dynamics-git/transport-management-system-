@@ -29,6 +29,14 @@ page 50622 "TMS Route Trip Header API"
                 field(notes; Rec."Notes") { }
                 field(createdBy; Rec."Created By") { }
                 field(createdAt; Rec."Created At") { }
+                field(plannedAt; Rec."Planned At") { }
+                field(loadedAt; Rec."Loaded At") { }
+                field(dispatchedAt; Rec."Dispatched At") { }
+                field(deliveredAt; Rec."Delivered At") { }
+                field(podPendingAt; Rec."POD Pending At") { }
+                field(closedAt; Rec."Closed At") { }
+                field(lastStatusChangedAt; Rec."Last Status Changed At") { }
+                field(lastStatusChangedBy; Rec."Last Status Changed By") { }
             }
         }
     }
