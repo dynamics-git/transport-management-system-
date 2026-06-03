@@ -29,8 +29,7 @@ codeunit 50642 "TMS Trip Management"
     var
         TripLine: Record "TMS Route Trip Line";
         SalesLine: Record "Sales Line";
-        Item: Record Item;
-        ItemWeight: Decimal;
+        LineWeight: Decimal;
         LineNo: Integer;
     begin
         SalesLine.Get(SalesLine."Document Type"::Order, SourceDocNo, SourceLineNo);
@@ -45,16 +44,13 @@ codeunit 50642 "TMS Trip Management"
         TripLine."Source Document No." := SourceDocNo;
         TripLine."Source Line No." := SourceLineNo;
         TripLine."Customer No." := SalesLine."Sell-to Customer No.";
-        if Item.Get(SalesLine."No.") then begin
-            ItemWeight := Item."Net Weight";
-            if ItemWeight = 0 then
-                ItemWeight := Item."Gross Weight";
+        LineWeight := SalesLine."Net Weight";
+        if LineWeight = 0 then
+            LineWeight := SalesLine."Gross Weight";
 
-            if ItemWeight <> 0 then
-                TripLine."Weight Tonne" := Round((SalesLine."Quantity" * ItemWeight) / 1000, 0.001, '=')
-            else
-                TripLine."Weight Tonne" := SalesLine."Quantity";
-        end else
+        if LineWeight <> 0 then
+            TripLine."Weight Tonne" := Round((SalesLine."Quantity" * LineWeight) / 1000, 0.001, '=')
+        else
             TripLine."Weight Tonne" := SalesLine."Quantity";
 
         TripLine."Bag Count" := SalesLine."Quantity";

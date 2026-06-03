@@ -25,8 +25,8 @@ page 50627 "Route Order Candidates API"
                 field(itemNo; Rec."No.") { }
                 field(description; Rec.Description) { }
                 field(quantity; Rec.Quantity) { }
-                field(itemGrossWeight; ItemGrossWeight) { }
-                field(itemNetWeight; ItemNetWeight) { }
+                field(itemGrossWeight; LineGrossWeight) { }
+                field(itemNetWeight; LineNetWeight) { }
                 field(weightTonne; WeightTonne) { }
                 field(outstandingQuantity; Rec."Outstanding Quantity") { }
                 field(unitOfMeasureCode; Rec."Unit of Measure Code") { }
@@ -69,13 +69,11 @@ page 50627 "Route Order Candidates API"
         SequenceNo: Integer;
         LineStatus: Text[20];
         PlanningStatus: Text[20];
-        ItemGrossWeight: Decimal;
-        ItemNetWeight: Decimal;
+        LineGrossWeight: Decimal;
+        LineNetWeight: Decimal;
         WeightTonne: Decimal;
-        ItemWeight: Decimal;
         SalesHeader: Record "Sales Header";
         Customer: Record Customer;
-        Item: Record Item;
         RouteTripLine: Record "TMS Route Trip Line";
 
     trigger OnAfterGetRecord()
@@ -92,10 +90,9 @@ page 50627 "Route Order Candidates API"
         Clear(SequenceNo);
         Clear(LineStatus);
         Clear(PlanningStatus);
-        Clear(ItemGrossWeight);
-        Clear(ItemNetWeight);
+        Clear(LineGrossWeight);
+        Clear(LineNetWeight);
         Clear(WeightTonne);
-        Clear(ItemWeight);
 
         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then begin
             CustNo := SalesHeader."Sell-to Customer No.";
@@ -111,17 +108,15 @@ page 50627 "Route Order Candidates API"
             end;
         end;
 
-        if Item.Get(Rec."No.") then begin
-            ItemGrossWeight := Item."Gross Weight";
-            ItemWeight := Item."Net Weight";
-            if ItemWeight = 0 then
-                ItemWeight := Item."Gross Weight";
+        LineGrossWeight := Rec."Gross Weight";
+        LineNetWeight := Rec."Net Weight";
 
-            ItemNetWeight := ItemWeight;
-
-            if ItemWeight <> 0 then
-                WeightTonne := Round((Rec.Quantity * ItemWeight) / 1000, 0.001, '=');
-        end;
+        if LineNetWeight <> 0 then
+            WeightTonne := Round((Rec.Quantity * LineNetWeight) / 1000, 0.001, '=')
+        else if LineGrossWeight <> 0 then
+            WeightTonne := Round((Rec.Quantity * LineGrossWeight) / 1000, 0.001, '=')
+        else
+            WeightTonne := Rec.Quantity;
 
         RouteTripLine.Reset();
         RouteTripLine.SetRange("Source Document Type", RouteTripLine."Source Document Type"::"Sales Order");
