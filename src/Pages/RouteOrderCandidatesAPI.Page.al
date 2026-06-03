@@ -25,6 +25,9 @@ page 50627 "Route Order Candidates API"
                 field(itemNo; Rec."No.") { }
                 field(description; Rec.Description) { }
                 field(quantity; Rec.Quantity) { }
+                field(itemGrossWeight; ItemGrossWeight) { }
+                field(itemNetWeight; ItemNetWeight) { }
+                field(weightTonne; WeightTonne) { }
                 field(outstandingQuantity; Rec."Outstanding Quantity") { }
                 field(unitOfMeasureCode; Rec."Unit of Measure Code") { }
                 field(deliveryDate; Rec."Shipment Date") { }
@@ -66,8 +69,13 @@ page 50627 "Route Order Candidates API"
         SequenceNo: Integer;
         LineStatus: Text[20];
         PlanningStatus: Text[20];
+        ItemGrossWeight: Decimal;
+        ItemNetWeight: Decimal;
+        WeightTonne: Decimal;
+        ItemWeight: Decimal;
         SalesHeader: Record "Sales Header";
         Customer: Record Customer;
+        Item: Record Item;
         RouteTripLine: Record "TMS Route Trip Line";
 
     trigger OnAfterGetRecord()
@@ -84,6 +92,10 @@ page 50627 "Route Order Candidates API"
         Clear(SequenceNo);
         Clear(LineStatus);
         Clear(PlanningStatus);
+        Clear(ItemGrossWeight);
+        Clear(ItemNetWeight);
+        Clear(WeightTonne);
+        Clear(ItemWeight);
 
         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then begin
             CustNo := SalesHeader."Sell-to Customer No.";
@@ -97,6 +109,18 @@ page 50627 "Route Order Candidates API"
                 CustPhoneNo := Customer."Phone No.";
                 CustEmail := Customer."E-Mail";
             end;
+        end;
+
+        if Item.Get(Rec."No.") then begin
+            ItemGrossWeight := Item."Gross Weight";
+            ItemWeight := Item."Net Weight";
+            if ItemWeight = 0 then
+                ItemWeight := Item."Gross Weight";
+
+            ItemNetWeight := ItemWeight;
+
+            if ItemWeight <> 0 then
+                WeightTonne := Round((Rec.Quantity * ItemWeight) / 1000, 0.001, '=');
         end;
 
         RouteTripLine.Reset();
