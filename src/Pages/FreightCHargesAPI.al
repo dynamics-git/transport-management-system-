@@ -1,74 +1,29 @@
 page 50601 "Freight Charges API"
 {
-    APIGroup = 'procure';
-    APIPublisher = 'tecsa';
-    APIVersion = 'v1.0';
-    ApplicationArea = All;
-    Caption = 'freightCHargesAPI';
-    DelayedInsert = true;
-    EntityName = 'freightCharge';
-    EntitySetName = 'freightCharges';
     PageType = API;
+    APIPublisher = 'tecsa';
+    APIGroup = 'procure';
+    APIVersion = 'v1.0';
+    EntityName = 'freightChargeSetup';
+    EntitySetName = 'freightChargeSetups';
     SourceTable = "Freight Charges";
+    DelayedInsert = true;
+    ODataKeyFields = "Code";
 
     layout
     {
-        area(Content)
+        area(content)
         {
-            repeater(General)
+            repeater(Group)
             {
-                field(active; Rec.Active)
-                {
-                    Caption = 'Active';
-                }
-                field("code"; Rec."Code")
-                {
-                    Caption = 'Code';
-                }
-                field(freightRate; Rec."Freight Rate")
-                {
-                    Caption = 'Freight Rate';
-                }
-                field(handlingCharge; Rec."Handling Charge")
-                {
-                    Caption = 'Handling Charge';
-                }
-                field(loadType; Rec."Load Type")
-                {
-                    Caption = 'Load Type';
-                }
-                field(locationCode; Rec."Location Code")
-                {
-                    Caption = 'Location Code';
-                }
-                field(region; Rec.Region)
-                {
-                    Caption = 'Region';
-                }
-                field(remarks; Rec.Remarks)
-                {
-                    Caption = 'Remarks';
-                }
-                field(systemCreatedAt; Rec.SystemCreatedAt)
-                {
-                    Caption = 'SystemCreatedAt';
-                }
-                field(systemCreatedBy; Rec.SystemCreatedBy)
-                {
-                    Caption = 'SystemCreatedBy';
-                }
-                field(systemId; Rec.SystemId)
-                {
-                    Caption = 'SystemId';
-                }
-                field(systemModifiedAt; Rec.SystemModifiedAt)
-                {
-                    Caption = 'SystemModifiedAt';
-                }
-                field(systemModifiedBy; Rec.SystemModifiedBy)
-                {
-                    Caption = 'SystemModifiedBy';
-                }
+                field(code; Rec."Code") { }
+                field(locationCode; Rec."Location Code") { }
+                field(region; Rec."Region") { }
+                field(loadType; Rec."Load Type") { }
+                field(freightRate; Rec."Freight Rate") { }
+                field(handlingCharge; Rec."Handling Charge") { }
+                field(active; Rec."Active") { }
+                field(remarks; Rec."Remarks") { }
             }
         }
     }
