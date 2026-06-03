@@ -63,4 +63,49 @@ table 50613 "TMS Route Trip Line"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    var
+        ExistingLine: Record "TMS Route Trip Line";
+        SalesLine: Record "Sales Line";
+        SalesHeader: Record "Sales Header";
+        LineWeight: Decimal;
+    begin
+        if "Line No." = 0 then begin
+            ExistingLine.SetRange("Trip No.", "Trip No.");
+            if ExistingLine.FindLast() then
+                "Line No." := ExistingLine."Line No." + 10000
+            else
+                "Line No." := 10000;
+        end;
+
+        if ("Source Document Type" = "Source Document Type"::"Sales Order") and
+           ("Source Document No." <> '') and
+           ("Source Line No." <> 0) and
+           SalesLine.Get(SalesLine."Document Type"::Order, "Source Document No.", "Source Line No.") then begin
+            if "Customer No." = '' then
+                "Customer No." := SalesLine."Sell-to Customer No.";
+
+            if SalesHeader.Get(SalesLine."Document Type", SalesLine."Document No.") then
+                if "Ship-to Code" = '' then
+                    "Ship-to Code" := SalesHeader."Ship-to Code";
+
+            LineWeight := SalesLine."Net Weight";
+            if LineWeight = 0 then
+                LineWeight := SalesLine."Gross Weight";
+
+            if "Weight Tonne" = 0 then begin
+                if LineWeight <> 0 then
+                    "Weight Tonne" := Round((SalesLine.Quantity * LineWeight) / 1000, 0.001, '=')
+                else
+                    "Weight Tonne" := SalesLine.Quantity;
+            end;
+
+            if "Bag Count" = 0 then
+                "Bag Count" := Round(SalesLine.Quantity, 1, '=');
+        end;
+
+        if Format("Line Status") = '' then
+            "Line Status" := "Line Status"::Planned;
+    end;
 }
