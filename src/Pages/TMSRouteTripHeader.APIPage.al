@@ -8,7 +8,7 @@ page 50622 "TMS Route Trip Header API"
     EntitySetName = 'routetripheaders';
     SourceTable = "TMS Route Trip Header";
     DelayedInsert = true;
-    ODataKeyFields = "Trip No.";
+    ODataKeyFields = SystemId;
     layout
     {
         area(content)
@@ -29,6 +29,26 @@ page 50622 "TMS Route Trip Header API"
                 field(notes; Rec."Notes") { }
                 field(createdBy; Rec."Created By") { }
                 field(createdAt; Rec."Created At") { }
+                field(systemCreatedAt; Rec.SystemCreatedAt)
+                {
+                    Caption = 'SystemCreatedAt';
+                }
+                field(systemCreatedBy; Rec.SystemCreatedBy)
+                {
+                    Caption = 'SystemCreatedBy';
+                }
+                field(systemId; Rec.SystemId)
+                {
+                    Caption = 'SystemId';
+                }
+                field(systemModifiedAt; Rec.SystemModifiedAt)
+                {
+                    Caption = 'SystemModifiedAt';
+                }
+                field(systemModifiedBy; Rec.SystemModifiedBy)
+                {
+                    Caption = 'SystemModifiedBy';
+                }
             }
         }
     }
