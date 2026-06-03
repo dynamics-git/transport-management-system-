@@ -71,4 +71,19 @@ table 50612 "TMS Route Trip Header"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    begin
+        if "Trip No." = '' then
+            "Trip No." := CopyStr('TR' + DelChr(Format(CreateGuid()), '=', '{}-'), 1, MaxStrLen("Trip No."));
+
+        if Format(Status) = '' then
+            Status := Status::Draft;
+
+        if "Created By" = '' then
+            "Created By" := CopyStr(UserId, 1, MaxStrLen("Created By"));
+
+        if "Created At" = 0DT then
+            "Created At" := CurrentDateTime;
+    end;
 }

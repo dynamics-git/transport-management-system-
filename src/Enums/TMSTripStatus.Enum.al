@@ -1,6 +1,7 @@
 enum 50601 "TMS Trip Status"
 {
     Extensible = true;
+    value(6; Draft) { }
     value(0; Planned) { }
     value(1; Loaded) { }
     value(2; Dispatched) { }

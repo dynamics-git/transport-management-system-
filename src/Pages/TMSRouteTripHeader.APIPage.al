@@ -17,12 +17,12 @@ page 50622 "TMS Route Trip Header API"
             {
                 field(tripNo; Rec."Trip No.") { }
                 field(plannedDate; Rec."Planned Date") { }
-                field(hubLocationCode; Rec."Hub Location Code") { }
+                field(locationCode; Rec."Hub Location Code") { }
                 field(loadType; Rec."Load Type") { }
-                field(transporterCode; Rec."Transporter Code") { }
+                field(transporterNo; Rec."Transporter Code") { }
                 field(truckNo; Rec."Truck No.") { }
                 field(status; Rec."Status") { }
-                field(totalWeight; Rec."Total Weight") { }
+                field(totalWeightTonne; Rec."Total Weight") { }
                 field(totalBags; Rec."Total Bags") { }
                 field(podReceived; Rec."POD Received") { }
                 field(podDate; Rec."POD Date") { }
