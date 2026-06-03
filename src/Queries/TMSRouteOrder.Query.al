@@ -15,6 +15,16 @@ query 50630 "TMS Route Order"
             column(customerName; "Sell-to Customer Name") { }
             column(hubLocationCode; "Location Code") { }
             column(deliveryDate; "Shipment Date") { }
+            column(shipToCode; "Ship-to Code") { }
+            column(shipToName; "Ship-to Name") { }
+            column(shipToAddress; "Ship-to Address") { }
+            column(shipToAddress2; "Ship-to Address 2") { }
+            column(shipToCity; "Ship-to City") { }
+            column(shipToPostCode; "Ship-to Post Code") { }
+            column(customerAddress; "Sell-to Address") { }
+            column(customerAddress2; "Sell-to Address 2") { }
+            column(customerCity; "Sell-to City") { }
+            column(customerPostCode; "Sell-to Post Code") { }
             dataitem(SalesLine; "Sales Line")
             {
                 DataItemLink = "Document Type" = SalesHeader."Document Type", "Document No." = SalesHeader."No.";
