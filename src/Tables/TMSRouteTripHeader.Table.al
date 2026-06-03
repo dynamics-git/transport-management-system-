@@ -95,6 +95,10 @@ table 50612 "TMS Route Trip Header"
         {
             Caption = 'Last Status Changed By';
         }
+        field(23; "Portal User ID"; Code[100])
+        {
+            Caption = 'Portal User ID';
+        }
     }
     keys
     {
@@ -105,6 +109,9 @@ table 50612 "TMS Route Trip Header"
     }
 
     trigger OnInsert()
+    var
+        ActivityMgt: Codeunit "TMS Trip Activity Management";
+        Actor: Code[100];
     begin
         if "Trip No." = '' then
             "Trip No." := CopyStr('TR' + DelChr(Format(CreateGuid()), '=', '{}-'), 1, MaxStrLen("Trip No."));
@@ -112,8 +119,12 @@ table 50612 "TMS Route Trip Header"
         if Format(Status) = '' then
             Status := Status::Draft;
 
-        if "Created By" = '' then
-            "Created By" := CopyStr(UserId, 1, MaxStrLen("Created By"));
+        if "Created By" = '' then begin
+            if "Portal User ID" <> '' then
+                "Created By" := CopyStr("Portal User ID", 1, MaxStrLen("Created By"))
+            else
+                "Created By" := CopyStr(UserId, 1, MaxStrLen("Created By"));
+        end;
 
         if "Created At" = 0DT then
             "Created At" := CurrentDateTime;
@@ -123,22 +134,47 @@ table 50612 "TMS Route Trip Header"
 
         if "Last Status Changed By" = '' then
             "Last Status Changed By" := "Created By";
+
+        Actor := "Portal User ID";
+        if Actor = '' then
+            Actor := CopyStr(UserId, 1, MaxStrLen(Actor));
+
+        ActivityMgt.LogActivity(
+            "Trip No.",
+            'CREATE',
+            'Trip created',
+            "Created At",
+            Actor,
+            CopyStr(UserId, 1, 50),
+            'TMS Route Trip Header',
+            '',
+            Format(Status),
+            StrSubstNo('Trip %1 created.', "Trip No.")
+        );
     end;
 
     trigger OnModify()
     begin
         if xRec.Status <> Status then
-            UpdateStatusAudit();
+            UpdateStatusAudit(xRec.Status);
     end;
 
-    local procedure UpdateStatusAudit()
+    local procedure UpdateStatusAudit(OldStatus: Enum "TMS Trip Status")
     var
+        ActivityMgt: Codeunit "TMS Trip Activity Management";
         StatusChangedAt: DateTime;
+        Actor: Code[100];
+        BCActor: Code[50];
     begin
         StatusChangedAt := CurrentDateTime;
 
+        BCActor := CopyStr(UserId, 1, MaxStrLen(BCActor));
+        Actor := "Portal User ID";
+        if Actor = '' then
+            Actor := BCActor;
+
         "Last Status Changed At" := StatusChangedAt;
-        "Last Status Changed By" := CopyStr(UserId, 1, MaxStrLen("Last Status Changed By"));
+        "Last Status Changed By" := CopyStr(Actor, 1, MaxStrLen("Last Status Changed By"));
 
         case Status of
             Status::Planned:
@@ -160,5 +196,18 @@ table 50612 "TMS Route Trip Header"
                 if "Closed At" = 0DT then
                     "Closed At" := StatusChangedAt;
         end;
+
+        ActivityMgt.LogActivity(
+            "Trip No.",
+            'STATUS',
+            StrSubstNo('Trip marked %1', Format(Status)),
+            StatusChangedAt,
+            Actor,
+            BCActor,
+            'TMS Route Trip Header',
+            Format(OldStatus),
+            Format(Status),
+            StrSubstNo('Status changed from %1 to %2.', Format(OldStatus), Format(Status))
+        );
     end;
 }

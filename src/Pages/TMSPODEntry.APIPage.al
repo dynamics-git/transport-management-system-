@@ -19,6 +19,8 @@ page 50625 "TMS POD Entry API"
                 field(tripNo; Rec."Trip No.") { }
                 field(podDate; Rec."POD Date") { }
                 field(receivedBy; Rec."Received By") { }
+                field(receivedAt; Rec."Received At") { }
+                field(portalUserId; Rec."Portal User ID") { }
                 field(photoPath; Rec."Photo Path") { }
                 field(remarks; Rec."Remarks") { }
             }

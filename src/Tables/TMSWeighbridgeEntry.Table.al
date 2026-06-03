@@ -47,8 +47,63 @@ table 50614 "TMS Weighbridge Entry"
     }
 
     trigger OnInsert()
+    var
+        ActivityMgt: Codeunit "TMS Trip Activity Management";
+        Actor: Code[100];
+        BCActor: Code[50];
     begin
         if "Entry No." = '' then
             "Entry No." := CopyStr('WB' + DelChr(Format(CreateGuid()), '=', '{}-'), 1, MaxStrLen("Entry No."));
+
+        if "Recorded At" = 0DT then
+            "Recorded At" := CurrentDateTime;
+
+        BCActor := CopyStr(UserId, 1, MaxStrLen(BCActor));
+        Actor := "Recorded By";
+        if Actor = '' then
+            Actor := BCActor;
+
+        ActivityMgt.LogActivity(
+            "Trip No.",
+            'WEIGHBRIDGE',
+            'Weighbridge recorded',
+            "Recorded At",
+            Actor,
+            BCActor,
+            'TMS Weighbridge Entry',
+            '',
+            Format("Net Weight"),
+            StrSubstNo('Net %1T, Gross %2T, Tare %3T.', "Net Weight", "Gross Weight", "Tare Weight")
+        );
+    end;
+
+    trigger OnModify()
+    var
+        ActivityMgt: Codeunit "TMS Trip Activity Management";
+        Actor: Code[100];
+        BCActor: Code[50];
+        ActivityAt: DateTime;
+    begin
+        ActivityAt := CurrentDateTime;
+        if "Recorded At" = 0DT then
+            "Recorded At" := ActivityAt;
+
+        BCActor := CopyStr(UserId, 1, MaxStrLen(BCActor));
+        Actor := "Recorded By";
+        if Actor = '' then
+            Actor := BCActor;
+
+        ActivityMgt.LogActivity(
+            "Trip No.",
+            'WEIGHBRIDGE',
+            'Weighbridge updated',
+            ActivityAt,
+            Actor,
+            BCActor,
+            'TMS Weighbridge Entry',
+            Format(xRec."Net Weight"),
+            Format("Net Weight"),
+            StrSubstNo('Net %1T, Gross %2T, Tare %3T.', "Net Weight", "Gross Weight", "Tare Weight")
+        );
     end;
 }

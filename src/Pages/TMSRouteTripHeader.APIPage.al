@@ -37,6 +37,7 @@ page 50622 "TMS Route Trip Header API"
                 field(closedAt; Rec."Closed At") { }
                 field(lastStatusChangedAt; Rec."Last Status Changed At") { }
                 field(lastStatusChangedBy; Rec."Last Status Changed By") { }
+                field(portalUserId; Rec."Portal User ID") { }
             }
         }
     }
