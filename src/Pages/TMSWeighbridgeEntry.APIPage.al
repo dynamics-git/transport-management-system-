@@ -8,7 +8,7 @@ page 50624 "TMS Weighbridge Entry API"
     EntitySetName = 'weighbridgeentries';
     SourceTable = "TMS Weighbridge Entry";
     DelayedInsert = true;
-    ODataKeyFields = "Entry No.";
+    ODataKeyFields = "Trip No.";
     layout
     {
         area(content)

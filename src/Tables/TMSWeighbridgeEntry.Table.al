@@ -45,4 +45,10 @@ table 50614 "TMS Weighbridge Entry"
             Clustered = true;
         }
     }
+
+    trigger OnInsert()
+    begin
+        if "Entry No." = '' then
+            "Entry No." := CopyStr('WB' + DelChr(Format(CreateGuid()), '=', '{}-'), 1, MaxStrLen("Entry No."));
+    end;
 }
