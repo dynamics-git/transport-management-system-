@@ -42,6 +42,12 @@ page 50627 "Route Order Candidates API"
                 field(customerPhoneNo; CustPhoneNo) { }
                 field(customerEmail; CustEmail) { }
 
+                // TMS Planning Context
+                field(locationCode; TMSHubCode) { }
+                field(dispatchLocationCode; DispatchLocationCode) { }
+                field(region; TMSRegion) { }
+                field(loadType; TMSLoadTypeTxt) { }
+
                 // Delivery Location
                 field(shipToCode; ShipToCode) { }
 
@@ -64,6 +70,10 @@ page 50627 "Route Order Candidates API"
         CustPostCode: Code[20];
         CustPhoneNo: Text[30];
         CustEmail: Text[80];
+        TMSHubCode: Code[20];
+        DispatchLocationCode: Code[10];
+        TMSRegion: Text[50];
+        TMSLoadTypeTxt: Text[30];
         ShipToCode: Code[10];
         AssignedTripNo: Code[20];
         SequenceNo: Integer;
@@ -75,6 +85,7 @@ page 50627 "Route Order Candidates API"
         SalesHeader: Record "Sales Header";
         Customer: Record Customer;
         RouteTripLine: Record "TMS Route Trip Line";
+        FreightCharge: Record "Freight Charges";
 
     trigger OnAfterGetRecord()
     begin
@@ -85,6 +96,10 @@ page 50627 "Route Order Candidates API"
         Clear(CustPostCode);
         Clear(CustPhoneNo);
         Clear(CustEmail);
+        Clear(TMSHubCode);
+        Clear(DispatchLocationCode);
+        Clear(TMSRegion);
+        Clear(TMSLoadTypeTxt);
         Clear(ShipToCode);
         Clear(AssignedTripNo);
         Clear(SequenceNo);
@@ -97,6 +112,13 @@ page 50627 "Route Order Candidates API"
         if SalesHeader.Get(Rec."Document Type", Rec."Document No.") then begin
             CustNo := SalesHeader."Sell-to Customer No.";
             ShipToCode := SalesHeader."Ship-to Code";
+            TMSHubCode := SalesHeader."TMS Hub Code";
+            DispatchLocationCode := SalesHeader."Location Code";
+            TMSRegion := SalesHeader."TMS Region";
+
+            TMSLoadTypeTxt := Format(SalesHeader."TMS Load Type");
+            if TMSLoadTypeTxt = '' then
+                TMSLoadTypeTxt := ResolveFallbackLoadType(TMSHubCode, TMSRegion);
 
             if Customer.Get(CustNo) then begin
                 CustName := Customer.Name;
@@ -136,5 +158,27 @@ page 50627 "Route Order Candidates API"
             else
                 PlanningStatus := 'Pending';
         end;
+    end;
+
+    local procedure ResolveFallbackLoadType(HubCode: Code[20]; Region: Text[50]): Text[30]
+    begin
+        if HubCode = '' then
+            exit('');
+
+        FreightCharge.Reset();
+        FreightCharge.SetRange("Location Code", HubCode);
+        FreightCharge.SetRange("Active", true);
+
+        if Region <> '' then begin
+            FreightCharge.SetRange("Region", Region);
+            if FreightCharge.FindFirst() then
+                exit(Format(FreightCharge."Load Type"));
+        end;
+
+        FreightCharge.SetRange("Region");
+        if FreightCharge.FindFirst() then
+            exit(Format(FreightCharge."Load Type"));
+
+        exit('');
     end;
 }
